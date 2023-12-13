@@ -1,0 +1,229 @@
+body {
+    font-family:'Times New Roman';
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image:url(IMAGES/OIP.jpeg);
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+#difficulteSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+#form {
+    border: 3px solid #333;
+    padding: 20px;
+    text-align: center;
+    width: 350px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#IDform{
+    border: 3px solid #333;
+    padding: 20px;
+    text-align: center;
+    width: 350px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+label {
+    margin-top: 10px;
+    display: block;
+    font-size: 20px;
+    color: #020202;
+    font-weight: bold;
+}
+
+#nom,#prenom{
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+#femme,#homme{
+ margin-top: 10px;
+ width: 100%;
+ padding: 10px;
+ border: 1px solid #ddd;
+ border-radius: 5px;
+ box-sizing: border-box;
+}
+.gender-options {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.choixNiveau{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.gender-options label {
+    cursor: pointer;
+    font-size: 18px;
+    color: #000000;
+    transition: color 0.3s ease-in-out;
+}
+
+.gender-options label:hover {
+    color: #3498db;
+}
+
+button{
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    border:solid 1px #000000;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 2px;
+    font-size: 18px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    background-color: #224761;
+}
+*,*::after,*::before{
+    box-sizing: border-box;
+}
+.board{
+    display: grid;
+    justify-content: center;
+    align-content:center ;
+    grid-template-columns: repeat(3,auto);
+    justify-items: center;
+    align-items: center;
+}
+
+.cell{
+    background-color: #ffffff;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+.cell.x,.cell.circle{
+    cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before{
+    background-color: #000000;
+}
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    background-color:lightgrey;
+}
+:root{
+    --cell-size:100px;
+    --mark-size: calc(var(--cell-size)*.9);
+}
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    content:'';
+    position: absolute;
+    width: calc(var(--mark-size)*.15);
+    height: var(--mark-size);
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    transform: rotate(-45deg);
+}
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    content:'';
+    position: absolute;
+    border-radius:50% ;
+}
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    width: var(--mark-size);
+    height: var(--mark-size);
+}
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+
+    width: calc(var(--mark-size)*.7);
+    height: calc(var(--mark-size)*.7);
+    background-color: #ffffff;
+}
+.winning-message{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+    flex-direction: column;
+}
+
+.winning-message button{
+    font-size: 3rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: .25em .5em;
+    cursor: pointer;
+    color: #000;
+}
+.winning-message button:hover{
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+.winning-message.show{
+    display: flex;
+}
+#jeuSection{
+    text-align: center;
+    border: 3px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#scoreSection{
+    text-align: center;
+    border: 3px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
