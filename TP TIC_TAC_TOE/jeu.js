@@ -85,32 +85,34 @@ function displayPlayerTurn() {
     turnMessageElement.classList.add('player-turn-message');
     
     if (circleTurn) {
-        turnMessageElement.innerText = "C'est le tour de l'adversaire";
+        turnMessageElement.innerText = "C'est le tour de X";
     } else {
-        turnMessageElement.innerText = "C'est votre tour";
+        turnMessageElement.innerText = "C'est le tour de O";
     }
 
     playerTurnMessages.appendChild(turnMessageElement);
 }
 
 
-
+var difficulte;
 function startGame(startingSymbol) {
     circleTurn = startingSymbol === 'o';
 
     const difficultySelect = document.getElementById("difficulty");
     const selectedDifficulty = parseInt(difficultySelect.value, 10);
     let winningCombinations;
-
     switch (selectedDifficulty) {
         case 4:
             winningCombinations = WINNING_COMBINATION_4x4;
+            difficulte="Moyen"
             break;
         case 5:
             winningCombinations = WINNING_COMBINATION_5x5;
+            difficulte="Difficile"
             break;
         default:
             winningCombinations = WINNING_COMBINATION;
+            difficulte="Facile"
     }
 
     const numCells = selectedDifficulty * selectedDifficulty;
@@ -156,22 +158,12 @@ function handleClick(e) {
 
 function endGame(draw) {
     if (draw) {
-        winningMessageTextElement.innerText = 'Partie Nulle *_*';
+        sauvegarderResultat(difficulte, 'nulle');
     } else {
-        winningMessageTextElement.innerText = `${circleTurn ? "Le joueur O" : "Le joueur X"} a gagné ^_^`;
+        sauvegarderResultat(difficulte, 'gagné');
     }
-    winningMessageElement.classList.add('show');
+    window.location.href = 'resultats.html';
 }
-
-document.addEventListener('click', function (e) {
-    const isOverlay = e.target.classList.contains('winning-message');
-
-    if (isOverlay) {
-        winningMessageElement.classList.remove('show');
-        startGame(selectedSymbol);
-    }
-});
-
 
 function isDraw() {
     return [...cellElements].every(cell => {
@@ -217,5 +209,17 @@ function getWinningCombinations() {
         default:
             return WINNING_COMBINATION;
     }
+}
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        var nom = document.getElementById('nom').value.trim();
+        var prenom = document.getElementById('prenom').value.trim();
+        var sexe = document.querySelector('input[name="sexe"]:checked');
+    });
+});
+function sauvegarderResultat(difficulte, resultat) {
+    localStorage.setItem('difficulte', difficulte);
+    localStorage.setItem('resultat', resultat);
 }
 

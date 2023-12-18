@@ -11,7 +11,7 @@
 <body>
     <main>
         <section id="inscriptionSection" class="main">
-            <form onsubmit="envoyerFormulaire(event); return false;" id="form" method="post"  action="">
+            <form onsubmit="envoyerFormulaire(event); return false;" id="form" method="post"  action="jeu.php>
                 <h1>Formulaire d'Inscription</h1>
                 <label for="nom">Veuillez saisir votre nom :</label>
                 <input type="text" id="nom" name="nom" required>
@@ -51,7 +51,7 @@
             </form>
         </section>
         <section id="jeuSection" style="display: none;">
-                <div class="player-turn-messages">
+                
                     
                 </div>
 
@@ -69,32 +69,22 @@
 
                <div style="display:inline;">
                     <button id="abandonnerButton" onclick="abandonnerJeu()">Abandonner</button>
-                    <button id="restartButton">Recommencer</button>
                </div>
-               
                <div class="winning-message" id="winningMessage">
-                    <div data-winning-message-text></div>      
+                    <div data-winning-message-text></div>    
                </div>
-        </section>
-        
-        <section id="scoreSection" style="display: none;">
-            <h1>Tableau des Scores</h1>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Jeu</th>
-                        <th>Nom du Joueur</th>
-                        <th>Difficulté</th>
-                        <th>Résultat</th>
-                    </tr>
-                </thead>
-                <tbody id="scoreTableBody">
-                    <!-- Les lignes seront ajoutées ici dynamiquement -->
-                </tbody>
-            </table>
-        </section>
     </main>
+    <script>function enregistrerJoueur() {
+        const nom = document.getElementById('nom').value;
+        const prenom = document.getElementById('prenom').value;
+        const sexe = document.querySelector('input[name="sexe"]:checked').value;
+        localStorage.setItem('nom', nom);
+        localStorage.setItem('prenom', prenom);
+        localStorage.setItem('sexe', sexe);
     
+    }
+    document.querySelector('form').addEventListener('submit', enregistrerJoueur);
+    </script>
     <script src="jeu.js" defer></script>
 </body>
 
